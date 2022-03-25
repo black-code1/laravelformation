@@ -26,4 +26,23 @@ class PostController extends Controller
         //             'title2' => $title2
         //         ]);
     }
+
+    public function show($id)
+    {
+        $posts = [
+            1 => 'Mon titre n 1',
+            2 => 'Mon titre n 2',
+        ];
+
+        $post = $posts[$id] ?? 'pas de titre';
+
+        return view('article',[
+            'post'=> $post
+        ]);
+    }
+
+    public function contact()
+    {
+        return view('contact');
+    }
 }
