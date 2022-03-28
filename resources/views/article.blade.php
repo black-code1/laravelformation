@@ -2,6 +2,7 @@
 
 @section('content')
     <h1>{{ $post->content }}</h1> 
+    <span>{{ $post->image ? $post->image->path : "pas d'image" }}</span>
 
     <hr>
     @forelse ($post->comments as $comment)
