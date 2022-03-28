@@ -2,43 +2,63 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
     public function index()
     {
-        $posts = [
-            'Mon super premier titre',
-            'Mon super second titre'
-        ];
+    //   $post = Post::find(1);
+    //   $post->update([
+    //       'title' => 'Titre edite'
+    //     ]);
         
-        return view('articles',compact('posts'));
-        
-        // $title = 'Mon super titre';
-        // $title2 = 'Mon super second titre';
+    //     dd('edite');
 
-        // return view('articles', compact('title'));
-        // return view('articles')->with('title',$title);
-        // return view('articles',compact('title','title2'));
-        // return view('articles',[
-        //             'title' => $title,
-        //             'title2' => $title2
-        //         ]);
+    $post = Post::find(12);
+    $post->delete();
+
+    dd('supprime !');
+    
+    $posts = Post::orderBy('title')->take(3)->get();
+
+       
+        
+        return view('articles',[
+            'posts' => $posts
+        ]);
+        
     }
 
     public function show($id)
     {
-        $posts = [
-            1 => 'Mon titre n 1',
-            2 => 'Mon titre n 2',
-        ];
+        $post = Post::findOrFail($id);
 
-        $post = $posts[$id] ?? 'pas de titre';
-
+        // $post = Post::where('title','Adipisci et sed voluptas eaque.')->firstOrFail();
+        
         return view('article',[
             'post'=> $post
         ]);
+    }
+
+    public function create(){
+     return view('form');   
+    }
+
+    public function store(Request $request)
+    {
+        // $post = new Post();
+        // $post->title = $request->title;
+        // $post->content = $request->content;
+        // $post->save();
+
+        Post::create([
+            'title' => $request->title,
+            'content' => $request->content
+        ]);
+
+        dd('Post cree !');
     }
 
     public function contact()
