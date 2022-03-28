@@ -16,15 +16,14 @@ class PostController extends Controller
         
     //     dd('edite');
 
-    $post = Post::find(12);
-    $post->delete();
+    // $post = Post::find(12);
+    // $post->delete();
 
-    dd('supprime !');
-    
-    $posts = Post::orderBy('title')->take(3)->get();
+    // dd('supprime !');
 
-       
-        
+    // $posts = Post::orderBy('title')->take(3)->get();
+    $posts = Post::all();
+ 
         return view('articles',[
             'posts' => $posts
         ]);
