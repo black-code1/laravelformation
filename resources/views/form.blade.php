@@ -3,11 +3,18 @@
 @section('content')
     <h1>Creer un nouveau post</h1>
 
+    @if ($errors->any())
+    @foreach ($errors->all() as $error)
+        <div class="text-red-500">{{ $error }}</div>
+    @endforeach
+        
+    @endif
+
     <form method="POST" action="{{ route('posts.store') }}" enctype="multipart/form-data">
         @csrf
         <input type="text" name="title" class="border-gray-600 border-2">
         <textarea name="content" cols="30" rows="10" class="border-gray-600 border-2"></textarea>
-        <p>Choose your monster's features:</p>
+        {{-- <p>Choose your monster's features:</p>
 
         <div>
         <input type="checkbox" id="scales" name="scales"
@@ -23,7 +30,7 @@
 
         <input type="file"
             id="avatar" name="avatar"
-            accept="image/png, image/jpeg">
+            accept="image/png, image/jpeg"> --}}
         <button type="submit" class="bg-green-500">Creer</button>
     </form>
 @endsection

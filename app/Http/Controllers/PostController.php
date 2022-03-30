@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Models\Video;
+use App\Rules\Uppercase;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -53,7 +54,23 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->input('title'));
+
+        $request->validate([
+            'title'=>['required','max:255','min:5','unique:posts', new Uppercase],
+            'content'=>['required']
+        ]);
+        Post::create([
+            'title' => $request->title,
+            'content' => $request->content
+        ]);
+
+        dd('Post cree !');
+        // $post = new Post();
+        // $post->title = $request->title;
+        // $post->content = $request->content;
+        // $post->save();
+
+         // dd($request->input('title'));
         // dd($request->is('posts/create'));
         // dd($request->routeIs('posts.store'));
         // dd($request->url());
@@ -71,32 +88,7 @@ class PostController extends Controller
         // dd($request->file('avatar'));
         // dd($request->avatar);
         // dd($request->avatar->extension());
-        dd($request->avatar->store('avatars'));
-
-
-
-
-
-
-
-
-
-
-
-
-
-        Post::create([
-            'title' => $request->title,
-            'content' => $request->content
-        ]);
-
-
-
-        // dd('Post cree !');
-        // $post = new Post();
-        // $post->title = $request->title;
-        // $post->content = $request->content;
-        // $post->save();
+        // dd($request->avatar->store('avatars'));
     }
 
     public function contact()
