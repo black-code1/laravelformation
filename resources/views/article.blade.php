@@ -10,4 +10,10 @@
     @empty
         <span>Aucun commentaire pour ce post.</span>
     @endforelse
+    <hr>
+    @forelse ($post->tags as $tag)
+        <span>{{ $tag->name }}</span>
+    @empty
+        <span>Aucun tags pour ce post.</span>
+    @endforelse
 @endsection
