@@ -20,4 +20,11 @@
     <hr>
 
     <span>Nom de l'artiste de l'image : {{ $post->imageArtist->name }}</span>
+
+    {{-- <hr> --}}
+
+    {{-- <span>Commentaire le plus recent : {{ $post->latestComment->content }}</span> --}}
+    {{-- <span>Commentaire le plus ancient : {{ $post->oldestComment->content }}</span> --}}
+
+
 @endsection
