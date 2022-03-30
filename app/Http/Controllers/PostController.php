@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Image;
 use App\Models\Post;
 use App\Models\Video;
 use App\Rules\Uppercase;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -54,15 +56,36 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
+        // $request->validate([
+        //     'title'=>['required','max:255','min:5','unique:posts', new Uppercase],
+        //     'content'=>['required']
+        // ]);
+        // Storage::disk('public')->put('avatars',$request->avatar);
+        // $name = Storage::disk('local')->put('avatars',$request->avatar);
 
-        $request->validate([
-            'title'=>['required','max:255','min:5','unique:posts', new Uppercase],
-            'content'=>['required']
-        ]);
-        Post::create([
+        // dd(Storage::get($name));
+        // dd(Storage::disk('local')->exists($name));
+        // return Storage::download($name);
+        // dd(Storage::url($name));
+        // dd(Storage::size($name));
+        // dd(Storage::path($name));
+        // dd(Storage::put('avatarstest', $request->avatar));
+        // dd($request->file('avatar')->store('avatarstest2'));
+        // dd($request->file('avatar')->storeAs('avatarstest2','test.jpg '));
+        // dd($filename);
+        $filename = time() . '.' . $request->avatar->extension();
+        $path = $request->file('avatar')->storeAs('avatars',$filename, 'public');
+
+       
+        $post = Post::create([
             'title' => $request->title,
             'content' => $request->content
         ]);
+
+        $image = new Image();
+        $image->path = $path;
+
+        $post->image()->save($image);//enregistre l'id du post de l'image
 
         dd('Post cree !');
         // $post = new Post();

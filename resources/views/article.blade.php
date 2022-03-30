@@ -2,8 +2,8 @@
 
 @section('content')
     <h1>{{ $post->content }}</h1> 
-    <span>{{ $post->image ? $post->image->path : "pas d'image" }}</span>
-
+    {{-- <span>{{ $post->image ? $post->image->path : "pas d'image" }}</span> --}}
+    <img src="{{ Storage::url($post->image->path) }}" alt="">
     <hr>
     @forelse ($post->comments as $comment)
         <div>{{ $comment->content }} | cree le {{ $comment->created_at->format('d/m/Y') }}</div>
@@ -19,7 +19,7 @@
 
     <hr>
 
-    <span>Nom de l'artiste de l'image : {{ $post->imageArtist->name }}</span>
+    {{-- <span>Nom de l'artiste de l'image : {{ $post->imageArtist->name }}</span> --}}
 
     {{-- <hr> --}}
 
