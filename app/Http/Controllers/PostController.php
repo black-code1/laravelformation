@@ -53,17 +53,50 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        // $post = new Post();
-        // $post->title = $request->title;
-        // $post->content = $request->content;
-        // $post->save();
+        // dd($request->input('title'));
+        // dd($request->is('posts/create'));
+        // dd($request->routeIs('posts.store'));
+        // dd($request->url());
+        // dd($request->fullUrl());
+        // dd($request->fullUrlWithQuery(['name' => '123456']));
+        // dd($request->method());
+        // dd($request->isMethod('POST'));
+        // dd($request->all());
+        // dd($request->input('_token'));
+        // dd($request->input('test','default'));
+        // dd($request->boolean('scales'), $request->boolean('horns'));
+        // dd($request->only('_token'));
+        // dd($request->only(['_token','scales']));
+        // dd($request->except(['_token']));
+        // dd($request->file('avatar'));
+        // dd($request->avatar);
+        // dd($request->avatar->extension());
+        dd($request->avatar->store('avatars'));
+
+
+
+
+
+
+
+
+
+
+
+
 
         Post::create([
             'title' => $request->title,
             'content' => $request->content
         ]);
 
-        dd('Post cree !');
+
+
+        // dd('Post cree !');
+        // $post = new Post();
+        // $post->title = $request->title;
+        // $post->content = $request->content;
+        // $post->save();
     }
 
     public function contact()
